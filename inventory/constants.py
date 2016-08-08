@@ -1,5 +1,13 @@
-COLOR = ['white', 'brown', 'black']
+COLOR = [ 
+	(1, 'white'),
+	(2, 'brown'), 
+	(3, 'black')
+]
 
-FACTORY = ['unknown']
+FACTORY = [('unknown', 'unknown')]
 
-STATUS = ['not started', 'ongoing', 'finished']
+ORDERSTATUS = [
+	(0, 'not started'), 
+	(1, 'ongoing'), 
+	(2, 'finished'),
+]

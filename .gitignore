@@ -1,5 +1,6 @@
 *.pyc
 tmp
+migrations
 *.json
 db.sqlite3
 .*
