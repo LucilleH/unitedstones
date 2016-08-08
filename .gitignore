@@ -3,6 +3,7 @@ tmp
 migrations
 *.json
 db.sqlite3
+unitedstones/conf.py
 .*
 !/.gitignore
 *.swp
