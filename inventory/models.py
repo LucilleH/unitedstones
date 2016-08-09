@@ -24,13 +24,21 @@ class Product(models.Model):
 	def get_name(self):
 		return self.name
 
+class Factory(models.Model):
+	class Meta:
+		ordering = ['name']
+	name = models.CharField(max_length=255)
+
+	def __unicode__(self):
+		return self.name
+
 class FactoryContract(models.Model):
 	class Meta:
 		ordering = ['-date_created']
 
 	contract_number = models.CharField(max_length=32)
 	manager = models.ForeignKey(User)
-	factory = models.CharField(max_length=255, choices=FACTORY, null=True, blank=True)
+	factory = models.ForeignKey(Factory)
 	total_price = models.DecimalField(max_digits=10, decimal_places=2)
 	date_created = models.DateTimeField(auto_now_add=True)
 	notes = models.TextField(null=True, blank=True)
@@ -56,7 +64,6 @@ class FactoryOrderItem(models.Model):
 	item = models.ForeignKey(Product)
 	order_quantity = models.IntegerField()
 	date_created = models.DateTimeField(auto_now_add=True)
-	factory = models.CharField(max_length=255, choices=FACTORY, null=True, blank=True)
 	number_received = models.IntegerField(default=0)
 
 	def expecting(self):

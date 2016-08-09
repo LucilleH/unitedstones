@@ -12,6 +12,10 @@ class ProductAdmin(admin.ModelAdmin):
 	list_display = ('model', 'color', 'suggested_price', 'cost')
 	ordering = ['model', 'color']
 
+class FactoryAdmin(admin.ModelAdmin):
+	list_display = ['name']
+	ordering = ['name']
+
 class FactoryOrderItemInline(admin.TabularInline):
 	model = FactoryOrderItem
 	extra = 5
@@ -44,6 +48,7 @@ class ClientOrderItemAdmin(admin.ModelAdmin):
 
 admin.site.register(Inventory, InventoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Factory, FactoryAdmin)
 admin.site.register(FactoryContract, FactoryContractAdmin)
 admin.site.register(FactoryOrderItem, FactoryOrderItemAdmin)
 admin.site.register(ClientContract, ClientContractAdmin)
