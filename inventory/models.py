@@ -41,7 +41,7 @@ class FactoryContract(models.Model):
 	factory = models.ForeignKey(Factory)
 	total_price = models.DecimalField(max_digits=10, decimal_places=2)
 	date_created = models.DateTimeField(auto_now_add=True)
-	notes = models.TextField(null=True, blank=True)
+	notes = models.TextField(blank=True)
 
 	def __unicode__(self):
 		return self.contract_number
@@ -65,6 +65,7 @@ class FactoryOrderItem(models.Model):
 	order_quantity = models.IntegerField()
 	date_created = models.DateTimeField(auto_now_add=True)
 	number_received = models.IntegerField(default=0)
+	notes = models.CharField(max_length=512, blank=True)
 
 	def expecting(self):
 		return self.order_quantity - self.number_received
@@ -83,7 +84,7 @@ class ClientContract(models.Model):
 	client_name = models.CharField(max_length=32)
 	total_price = models.DecimalField(max_digits=10, decimal_places=2)
 	date_created = models.DateTimeField(auto_now_add=True)
-	notes = models.TextField(null=True, blank=True)
+	notes = models.TextField(blank=True)
 
 	def __unicode__(self):
 		return self.contract_number
@@ -107,6 +108,7 @@ class ClientOrderItem(models.Model):
 	order_quantity = models.IntegerField()
 	date_created = models.DateTimeField(auto_now_add=True)
 	number_installed = models.IntegerField(default=0)
+	notes = models.CharField(max_length=512, blank=True)
 
 	def ongoing(self):
 		return self.order_quantity - self.number_installed

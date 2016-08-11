@@ -8,6 +8,11 @@ class InventoryAdmin(admin.ModelAdmin):
 	ordering = ['product']
 	search_fields = ['^product__model']
 
+	def get_readonly_fields(self, request, obj=None):
+		if obj: # editing an existing object
+			return self.readonly_fields + ('start_off_quantity',)
+		return self.readonly_fields
+
 class ProductAdmin(admin.ModelAdmin):
 	list_display = ('model', 'color', 'suggested_price', 'cost')
 	ordering = ['model', 'color']
@@ -21,13 +26,13 @@ class FactoryOrderItemInline(admin.TabularInline):
 	extra = 5
 
 class FactoryContractAdmin(admin.ModelAdmin):
-	list_display = ('contract_number', 'manager', 'factory', 'date_created', 'total_price', 'is_all_item_delivered')
+	list_display = ('contract_number', 'manager', 'factory', 'date_created', 'total_price', 'is_all_item_delivered', 'notes')
 	ordering = ['-date_created']
 	search_fields = ['^contract_number']
 	inlines = [FactoryOrderItemInline]
 
 class FactoryOrderItemAdmin(admin.ModelAdmin):
-	list_display = ('contract', 'item', 'order_quantity', 'date_created', 'number_received', 'expecting', 'is_complete')
+	list_display = ('contract', 'item', 'order_quantity', 'date_created', 'number_received', 'expecting', 'is_complete', 'notes')
 	ordering = ['-date_created']
 	search_fields = ['^item__model']
 
@@ -36,13 +41,13 @@ class ClientOrderItemInline(admin.TabularInline):
 	extra = 5
 
 class ClientContractAdmin(admin.ModelAdmin):
-	list_display = ('contract_number', 'manager', 'client_name', 'date_created', 'total_price', 'is_all_item_installed')
+	list_display = ('contract_number', 'manager', 'client_name', 'date_created', 'total_price', 'is_all_item_installed', 'notes')
 	ordering = ['-date_created']
 	search_fields = ['contract__client_name']
 	inlines = [ClientOrderItemInline]
 
 class ClientOrderItemAdmin(admin.ModelAdmin):
-	list_display = ('contract', 'item', 'order_quantity', 'date_created', 'number_installed', 'ongoing', 'is_complete')
+	list_display = ('contract', 'item', 'order_quantity', 'date_created', 'number_installed', 'ongoing', 'is_complete', 'notes')
 	ordering = ['-date_created']
 	search_fields = ['contract__client_name']
 
