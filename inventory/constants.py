@@ -1,8 +1,8 @@
 COLOR = [ 
-	(1, 'cherry shaker'),
-	(2, 'cherry america'), 
+	(1, 'america cherry'),
+	(2, 'cherry shaker'),
 	(3, 'white shaker'), 
-	(4, 'yellow shaker'),
+ 	(4, 'yellow shaker'),
 ]
 
 FACTORY = [('unknown', 'unknown')]
